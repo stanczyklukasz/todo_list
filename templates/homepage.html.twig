@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% set flashesbag = app.flashes %}
+
+{% block body %}
+    <h2>HomePage</h2>
+
+    {{ dump() }}
+
+    {% for task in tasks %}
+        <div>
+            <p style="display: inline-block">
+                {{ task.description }}
+            </p>
+            <form style="display: inline-block" method="post" action="{{ path('task_remove', {'taskId': task.id}) }}">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit">Usuń</button>
+            </form>
+        </div>
+    {% endfor %}
+
+{% endblock %}
