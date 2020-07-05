@@ -10,6 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Task
 {
+    private const PRIORITY_NAMES = [
+        1 => 'Niski',
+        2 => 'Normalny',
+        3 => 'Pilny'
+    ];
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -71,5 +78,11 @@ class Task
         $this->isDone = $isDone;
 
         return $this;
+    }
+
+
+    public function getPriorityName(): ?string
+    {
+        return self::PRIORITY_NAMES[$this->getPriority()];
     }
 }

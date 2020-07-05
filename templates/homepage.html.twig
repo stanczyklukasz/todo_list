@@ -2,20 +2,37 @@
 {% set flashesbag = app.flashes %}
 
 {% block body %}
-    <h2>HomePage</h2>
 
-    {{ dump() }}
+    <div class="container">
+        <div class="row">
 
-    {% for task in tasks %}
-        <div>
-            <p style="display: inline-block">
-                {{ task.description }}
-            </p>
-            <form style="display: inline-block" method="post" action="{{ path('task_remove', {'taskId': task.id}) }}">
-                <input type="hidden" name="_method" value="delete">
-                <button type="submit">Usuń</button>
-            </form>
+            <div class="col-12 my-5">
+                <h2>Lista zadań</h2>
+            </div>
+
+            {% set index = 1 %}
+            {% for task in tasks %}
+                <div class="col-5 mx-auto bg-light border border-dark shadow my-3 p-2">
+                    <div class="d-inline-block">
+                            <strong>{{ index }}</strong>
+                        <p> <strong>Opis: </strong> {{ task.description }}</p>
+                        <p><strong>Priorytet: </strong> {{ task.priorityName }}</p>
+                    </div>
+                    <div class="d-inline-block float-right">
+
+                        <a class="btn btn-outline-primary my-2" href="{{ path('task_edit', {'taskId': task.id}) }}"><i class="far fa-edit"></i></a>
+
+                        <form  method="post" action="{{ path('task_remove', {'taskId': task.id}) }}">
+                            <input type="hidden" name="_method" value="delete">
+                            <button type="submit" class="btn btn-outline-danger w-100" title="Usuń zadanie" onclick="confirm('Na pewno chcesz usunąc?')"><i class="fas fa-times"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                {% set index = index + 1 %}
+            {% endfor %}
+
         </div>
-    {% endfor %}
+    </div>
 
 {% endblock %}

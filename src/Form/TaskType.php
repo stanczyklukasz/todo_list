@@ -4,7 +4,9 @@
 namespace App\Form;
 
 
+use App\Entity\Task;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -16,16 +18,27 @@ class TaskType extends AbstractType
     {
         $builder
             ->add('description', TextType::class, [
-
-            ])
-            ->add('priority', IntegerType::class, [
                 'attr' => [
-                    'min' => 1,
-                    'max' => 3
+                    'class' => 'form-control'
+                ],
+                'label' => 'Opis'
+            ])
+            ->add('priority', ChoiceType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ],
+                'label' => 'Priorytet',
+                'choices' => [
+                    'Niski' => 1,
+                    'Normalny' => 2,
+                    'Pilny' => 3
                 ]
             ])
             ->add('btn_submit', SubmitType::class, [
-                'label' => "Zapisz"
+                'label' => "Zapisz",
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ]
             ]);
     }
 }
