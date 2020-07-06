@@ -2,7 +2,6 @@
 {% set flashesbag = app.flashes %}
 
 {% block body %}
-
     <div class="container">
         <div class="row">
 
@@ -10,11 +9,17 @@
                 <h2>Lista zadań</h2>
             </div>
 
+            {% if flashesbag.success is defined %}
+                <div class="col-8 mx-auto bg-success border border-dark shadow rounded">
+                    <p>{{ flashesbag.success[0] }}</p>
+                </div>
+            {% endif %}
+
             {% set index = 1 %}
             {% for task in tasks %}
                 <div class="col-5 mx-auto bg-light border border-dark shadow my-3 p-2">
                     <div class="d-inline-block">
-                            <strong>{{ index }}</strong>
+                        <strong>Id: {{ task.id }}</strong>
                         <p> <strong>Opis: </strong> {{ task.description }}</p>
                         <p><strong>Priorytet: </strong> {{ task.priorityName }}</p>
                     </div>

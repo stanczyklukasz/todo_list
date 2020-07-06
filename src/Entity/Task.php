@@ -16,6 +16,14 @@ class Task
         3 => 'Pilny'
     ];
 
+    public function __construct(
+        string $Description,
+        int $priority
+    ){
+        $this->setDescription($Description);
+        $this->setPriority($priority);
+        $this->setIsDone(false);
+    }
 
     /**
      * @ORM\Id()
